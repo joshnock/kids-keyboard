@@ -197,6 +197,16 @@ python3 test_kids_window.py --settings
 
 `python3 test_kids_window.py` with no flag presents the real window, exercises both modes, and closes itself. `--loading` checks the startup page. The snapshot it takes depends on the GTK renderer and can come back empty on this compositor, so it is a poor pass/fail gate.
 
+## Later
+
+None of this is in the app yet.
+
+**A picture for the word.** When a toddler word appears, show a kids-themed icon for it next to the letters: a cat beside `cat`, a sun beside `sun`.
+
+**Profiles.** More than one child can have a profile, so practice can be remembered and turned into a small game. Choosing and managing profiles stays with the parent chord. A toddler should not have to operate an account screen.
+
+**A progress report, kept on this computer.** The app can record practice locally and show the parent what is sticking: letters, finished words, and time in each mode. That report does not need an account in the cloud.
+
 ## License
 
 A license has not been chosen yet. Until one is added, this code is not offered for reuse.
