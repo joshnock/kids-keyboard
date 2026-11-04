@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Launch Kids Keyboard from this repository.
+root="$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)"
+exec python3 "$root/kids_typing.py" "$@"

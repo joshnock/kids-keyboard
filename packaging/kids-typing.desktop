@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Kids Keyboard
+GenericName=Typing Practice
+Comment=Infant and toddler keyboard practice
+Exec=kids-typing
+Icon=kids-typing
+Terminal=false
+Categories=Education;
+Keywords=kids;typing;keyboard;toddler;letters;
+StartupNotify=true
+StartupWMClass=kids.typing
+SingleMainWindow=true
