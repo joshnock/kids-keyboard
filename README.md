@@ -1,10 +1,37 @@
 # Kids Keyboard
 
-A fullscreen typing toy for the youngest kids. Infant mode says whatever they smash. Toddler mode shows one short word and waits for each letter, in order.
+<!-- PLACEHOLDER: docs/kids-keyboard-demo.gif has not been captured yet. Record the running app (Infant mode key smash, then a Toddler word) on the Linux/Wayland desktop and save it at that path. -->
+![Kids Keyboard demo: a child smashes keys and hears each letter spoken, then types a toddler word letter by letter](docs/kids-keyboard-demo.gif)
 
-The window is the whole screen. There is no settings button to poke, and ordinary desktop shortcuts stay out of the way while a child is playing. A parent leaves with a chord that a toddler will not hit by accident.
+**Kids Keyboard turns a keyboard into a talking alphabet for babies and toddlers.** It is a fullscreen Linux typing toy, written in Python with GTK 4, where every key press is answered with a spoken letter or number in a friendly AI-generated voice from the xAI Grok text-to-speech (Voice) API.
 
-It is a Python GTK 4 app. On this computer it is installed as **Kids Keyboard** and shows up in the Omarchy menu. The application id stays `kids.typing`, so the saved key and the voice cache keep their places.
+- **Infant mode:** smash any key and a big on-screen key shows the letter or number and says it aloud.
+- **Toddler mode:** one short word at a time (`cat`, `sun`, `fish`…). The app says the word, then waits for each letter in order and speaks it as the child types. Hold Space for a picture-keyboard hint.
+- **Child-proof:** the window is the whole screen, there is no settings button, and desktop shortcuts are inhibited. Parents get in or out with a five-key chord.
+- **Many voices:** 28 Grok voices, 10 picked at random per launch. Clips are cached on disk, so the API is only called for sounds not heard before.
+
+Voice needs an xAI API key. See [Add your Grok API key](#add-your-grok-api-key). Without one, Infant mode falls back to the espeak-ng robot voice and Toddler mode will not start new words.
+
+The application id is `kids.typing`, so the saved key and the voice cache keep their places. On Omarchy it is installed as **Kids Keyboard** and shows up in the menu.
+
+## Add your Grok API key
+
+The app calls `https://api.x.ai/v1/tts` with an xAI API key. Provide it any one of these ways.
+
+1. **Get a key.** Sign in at [console.x.ai](https://console.x.ai), make sure your team has credits or billing, and create an API key under **API Keys**. Copy it when shown.
+2. **Give it to the app** (pick one):
+   - **Settings screen (recommended).** Hold Shift, Ctrl, Command, Space, Return in order, then release within two seconds to open settings. Paste the key into the hidden field and save. It is stored in your login keyring (schema `kids.typing.XaiApiKey`). Saving an empty field removes it.
+   - **Environment variable.** Start the app with `XAI_API_KEY` set:
+     ```bash
+     export XAI_API_KEY="your-key-here"
+     python3 kids_typing.py
+     ```
+   - **`~/.bashrc`.** Add a line `XAI_API_KEY=your-key-here` (`export` is optional). It is read directly, which helps when the app is launched from a menu rather than a shell.
+3. **Precedence.** At run time the app uses the keyring key first, then `XAI_API_KEY`, then `~/.bashrc`. Settings pre-fills from the environment, then `.bashrc`, then the keyring.
+
+> **Warning:** the key is a secret that spends your money. Never commit it to git, paste it into issues, or put it in a file inside this repository. If it leaks, revoke it in the xAI console and create a new one.
+
+Already-cached clips play without a key. See [The voice key](#the-voice-key) for billing-limit behavior.
 
 ## A session
 
